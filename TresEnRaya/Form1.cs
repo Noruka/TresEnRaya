@@ -44,6 +44,12 @@ namespace TresEnRaya
             jugadorActivo = InicioRandom();
 
             UpdateJugador();
+            CheckMovimientosJugador();
+        }
+
+        public void CheckMovimientosJugador() {
+
+
         }
 
         //Selecciona uno de los dos jugadores al azar para empezar la partida.
