@@ -19,7 +19,7 @@ namespace TresEnRaya
 
         private Button[,] boton = new Button[3, 3];
 
-        int jugadorActivo = 0;
+        int jugadorActivo = 0, contadorJ1 = 3, contadorJ2 = 3;
 
         //Constructor
         public Form1()
@@ -35,7 +35,7 @@ namespace TresEnRaya
                     boton[i, j].Top = i * 100;
                     boton[i, j].Left = j * 100;
                     boton[i, j].Image = null;
-                    boton[i, j].Name = "btn"+i+j;
+                    boton[i, j].Name = "btn" + i + j;
                     boton[i, j].Click += new EventHandler(this.botonPulsado);
                     this.Controls.Add(boton[i, j]);
                 }
@@ -47,15 +47,15 @@ namespace TresEnRaya
         }
 
         //Selecciona uno de los dos jugadores al azar para empezar la partida.
-        public int InicioRandom() {
-
+        public int InicioRandom()
+        {
             Random r = new Random();
             int num = r.Next(1, 3);
             return num;
         }
 
-        public void UpdateJugador() {
-
+        public void UpdateJugador()
+        {
             switch (jugadorActivo)
             {
                 case 1: pbJugador.Image = TresEnRaya.Properties.Resources.x_asset; break;
@@ -73,7 +73,7 @@ namespace TresEnRaya
             switch (jugadorActivo)
             {
                 case 1:
-                    botonActual.Image = TresEnRaya.Properties.Resources.x_asset;
+                    botonActual.Image = TresEnRaya.Properties.Resources.btn_x_asset;
                     jugadorActivo = 2;
                     UpdateJugador();
                     break;

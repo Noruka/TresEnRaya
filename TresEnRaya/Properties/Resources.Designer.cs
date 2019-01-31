@@ -73,9 +73,9 @@ namespace TresEnRaya.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap O_3enraya {
+        internal static System.Drawing.Bitmap btn_x_asset {
             get {
-                object obj = ResourceManager.GetObject("O 3enraya", resourceCulture);
+                object obj = ResourceManager.GetObject("btn_x_asset", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,16 +86,6 @@ namespace TresEnRaya.Properties {
         internal static System.Drawing.Bitmap o_asset {
             get {
                 object obj = ResourceManager.GetObject("o_asset", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap X_3enraya {
-            get {
-                object obj = ResourceManager.GetObject("X 3enraya", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
