@@ -17,14 +17,26 @@ namespace TresEnRaya
         //    InitializeComponent();
         //}
 
+
+        //Global
         private Button[,] boton = new Button[3, 3];
 
-        int jugadorActivo = 0, contadorJ1 = 3, contadorJ2 = 3;
+        int jugadorActivo = 0;
+
+        static Jugador jugador1 = new Jugador(1, "x");
+        static Jugador jugador2 = new Jugador(2, "o");
+
+        Jugador[] jugadores = { jugador1, jugador2 };
+
+        //EndGlobal
 
         //Constructor
         public Form1()
         {
             InitializeComponent();
+
+
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -43,11 +55,7 @@ namespace TresEnRaya
 
             jugadorActivo = InicioRandom();
 
-            UpdateJugador();
-            CheckMovimientosJugador();
-        }
-
-        public void CheckMovimientosJugador() {
+            UpdatePerfil();
 
 
         }
@@ -56,7 +64,7 @@ namespace TresEnRaya
         public int InicioRandom()
         {
             Random r = new Random();
-            int num = r.Next(1, 3);
+            int num = r.Next(0, 1);
             return num;
         }
 
@@ -64,8 +72,28 @@ namespace TresEnRaya
         {
             switch (jugadorActivo)
             {
-                case 1: pbJugador.Image = TresEnRaya.Properties.Resources.x_asset; break;
-                case 2: pbJugador.Image = TresEnRaya.Properties.Resources.o_asset; break;
+                case 0:
+                    UpdatePerfil();
+                    jugadores[jugadorActivo].Fichas--;
+                    jugadores[jugadorActivo].Turnos++;
+                    break;
+
+                case 1:
+                    UpdatePerfil();
+                    jugadores[jugadorActivo].Fichas--;
+                    jugadores[jugadorActivo].Turnos++;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void UpdatePerfil()
+        {
+            switch (jugadorActivo)
+            {
+                case 0: pbJugador.Image = TresEnRaya.Properties.Resources.x_asset; break;
+                case 1: pbJugador.Image = TresEnRaya.Properties.Resources.o_asset; break;
                 default:
                     break;
             }
@@ -76,22 +104,56 @@ namespace TresEnRaya
         {
             Button botonActual = (Button)sender;
 
-            switch (jugadorActivo)
+            if (jugadores[jugadorActivo].Fichas > 0 && botonActual.Image == null)
             {
-                case 1:
-                    botonActual.Image = TresEnRaya.Properties.Resources.btn_x_asset;
-                    jugadorActivo = 2;
-                    UpdateJugador();
-                    break;
-
-                case 2:
-                    botonActual.Image = TresEnRaya.Properties.Resources.btn_o_asset;
-                    jugadorActivo = 1;
-                    UpdateJugador();
-                    break;
-                default:
-                    break;
+                switch (jugadorActivo)
+                {
+                    case 0:
+                        botonActual.Image = TresEnRaya.Properties.Resources.btn_x_asset;
+                        botonActual.Image.Tag = "x";
+                        UpdateJugador();
+                        jugadorActivo = 1;
+                        UpdatePerfil();
+                        break;
+                    case 1:
+                        botonActual.Image = TresEnRaya.Properties.Resources.btn_o_asset;
+                        botonActual.Image.Tag = "o";
+                        UpdateJugador();
+                        jugadorActivo = 0;
+                        UpdatePerfil();
+                        break;
+                    default:
+                        break;
+                }
             }
+            else
+            {
+                if (jugadores[jugadorActivo].Fichas < 0 && botonActual.Image != null)
+                {
+                    if (botonActual.Image.Tag.Equals(jugadores[jugadorActivo].Tipo))
+                    {
+                        botonActual.Image = null;
+                        botonActual.Image.Tag = null;
+                        jugadores[jugadorActivo].Fichas++;
+                        if (jugadorActivo == 0)
+                        {
+                            jugadorActivo = 1;
+                        }
+                        else
+                        {
+                            jugadorActivo = 0;
+                        }
+                        UpdatePerfil();
+                    }
+
+                }
+                else {
+                    MessageBox.Show("Aun tienes fichas, no puedes quitar aún");
+                }
+
+            }
+
+
         }
     }
 }
