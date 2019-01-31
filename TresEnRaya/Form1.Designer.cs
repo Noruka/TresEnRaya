@@ -28,13 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pbJugador = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbJugador)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 410);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(415, 36);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Es el turno del jugador: ";
+            // 
+            // pbJugador
+            // 
+            this.pbJugador.Image = global::TresEnRaya.Properties.Resources.X_3enraya;
+            this.pbJugador.Location = new System.Drawing.Point(433, 341);
+            this.pbJugador.Name = "pbJugador";
+            this.pbJugador.Size = new System.Drawing.Size(138, 141);
+            this.pbJugador.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbJugador.TabIndex = 1;
+            this.pbJugador.TabStop = false;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(615, 494);
+            this.Controls.Add(this.pbJugador);
+            this.Controls.Add(this.label1);
+            this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.pbJugador)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pbJugador;
     }
 }
 
