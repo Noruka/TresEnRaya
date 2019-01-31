@@ -21,6 +21,7 @@ namespace TresEnRaya
 
         int jugadorActivo = 0;
 
+        //Constructor
         public Form1()
         {
             InitializeComponent();
@@ -40,19 +41,12 @@ namespace TresEnRaya
                 }
             }
 
-            if (InicioRandom()==1)
-            {
-                
-                jugadorActivo = 1;
+            jugadorActivo = InicioRandom();
 
-            }
-            if (InicioRandom() == 2)
-            {
-                pbJugador.Image = TresEnRaya.Properties.Resources.O_3enraya;
-                jugadorActivo = 2;
-            }
+            UpdateJugador();
         }
 
+        //Selecciona uno de los dos jugadores al azar para empezar la partida.
         public int InicioRandom() {
 
             Random r = new Random();
@@ -60,19 +54,38 @@ namespace TresEnRaya
             return num;
         }
 
-        void botonPulsado(Object sender, EventArgs e)
+        public void UpdateJugador() {
+
+            switch (jugadorActivo)
+            {
+                case 1: pbJugador.Image = TresEnRaya.Properties.Resources.x_asset; break;
+                case 2: pbJugador.Image = TresEnRaya.Properties.Resources.o_asset; break;
+                default:
+                    break;
+            }
+        }
+
+        //Ejecuciones que hacen todos los botones al ser pulsados individualmente.
+        public void botonPulsado(Object sender, EventArgs e)
         {
             Button botonActual = (Button)sender;
-            if (jugadorActivo == 1)
-            {
-                botonActual.Image = TresEnRaya.Properties.Resources.X_3enraya;
-            }
-            if (jugadorActivo == 2)
-            {
-                botonActual.Image = TresEnRaya.Properties.Resources.O_3enraya;
-            }
 
+            switch (jugadorActivo)
+            {
+                case 1:
+                    botonActual.Image = TresEnRaya.Properties.Resources.x_asset;
+                    jugadorActivo = 2;
+                    UpdateJugador();
+                    break;
 
+                case 2:
+                    botonActual.Image = TresEnRaya.Properties.Resources.btn_o_asset;
+                    jugadorActivo = 1;
+                    UpdateJugador();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
