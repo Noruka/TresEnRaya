@@ -35,7 +35,7 @@ namespace TresEnRaya
         {
             InitializeComponent();
 
-            
+
             //Generar botones
             for (int i = 0; i < 3; i++)
             {
@@ -127,41 +127,42 @@ namespace TresEnRaya
             }
         }
 
-        public void CheckDiagonalDesc() {
+        public void CheckDiagonalDesc()
+        {
             int contadorX = 0, contadorO = 0;
 
             for (int i = 0; i < boton.GetLength(0); i++)
             {
                 Console.WriteLine("DD****************");
-                
-                    if (boton[i, i].Tag.Equals("x"))
-                    {
-                        contadorX++;
-                        Console.WriteLine("DDX-" + i + "-" + i + ": " + contadorX);
-                    }
-                    if (boton[i, i].Tag.Equals("o"))
-                    {
-                        contadorO++;
-                        Console.WriteLine("DDO-" + i + "-" + i + ": " + contadorO);
-                    }
 
-                    if (contadorX == 3)
-                    {
-                        jugador0.Ganador = true;
-                        Console.WriteLine("Jugador X gana!");
-                        MessageBox.Show("Jugador X gana!");
-                        Application.Exit();
-                    }
-                    if (contadorO == 3)
-                    {
-                        jugador1.Ganador = true;
-                        Console.WriteLine("Jugador O gana!");
-                        MessageBox.Show("Jugador O gana!");
-                        Application.Exit();
-                    }
-                
+                if (boton[i, i].Tag.Equals("x"))
+                {
+                    contadorX++;
+                    Console.WriteLine("DDX-" + i + "-" + i + ": " + contadorX);
+                }
+                if (boton[i, i].Tag.Equals("o"))
+                {
+                    contadorO++;
+                    Console.WriteLine("DDO-" + i + "-" + i + ": " + contadorO);
+                }
 
-                
+                if (contadorX == 3)
+                {
+                    jugador0.Ganador = true;
+                    Console.WriteLine("Jugador X gana!");
+                    MessageBox.Show("Jugador X gana!");
+                    Application.Exit();
+                }
+                if (contadorO == 3)
+                {
+                    jugador1.Ganador = true;
+                    Console.WriteLine("Jugador O gana!");
+                    MessageBox.Show("Jugador O gana!");
+                    Application.Exit();
+                }
+
+
+
             }
         }
 
@@ -169,37 +170,37 @@ namespace TresEnRaya
         {
             int contadorX = 0, contadorO = 0;
             int j = 0;
-            for (int i = boton.GetLength(0)-1; i > -1; i--)
+            for (int i = boton.GetLength(0) - 1; i > -1; i--)
             {
                 Console.WriteLine("DA****************");
 
-                
 
-                    if (boton[i, j].Tag.Equals("x"))
-                    {
-                        contadorX++;
-                        Console.WriteLine("DAX-" + i + "-" + j + ": " + contadorX);
-                    }
-                    if (boton[i, j].Tag.Equals("o"))
-                    {
-                        contadorO++;
-                        Console.WriteLine("DAO-" + i + "-" + j + ": " + contadorO);
-                    }
 
-                    if (contadorX == 3)
-                    {
-                        jugador0.Ganador = true;
-                        Console.WriteLine("Jugador X gana!");
-                        MessageBox.Show("Jugador X gana!");
-                        Application.Exit();
-                    }
-                    if (contadorO == 3)
-                    {
-                        jugador1.Ganador = true;
-                        Console.WriteLine("Jugador O gana!");
-                        MessageBox.Show("Jugador O gana!");
-                        Application.Exit();
-                    }
+                if (boton[i, j].Tag.Equals("x"))
+                {
+                    contadorX++;
+                    Console.WriteLine("DAX-" + i + "-" + j + ": " + contadorX);
+                }
+                if (boton[i, j].Tag.Equals("o"))
+                {
+                    contadorO++;
+                    Console.WriteLine("DAO-" + i + "-" + j + ": " + contadorO);
+                }
+
+                if (contadorX == 3)
+                {
+                    jugador0.Ganador = true;
+                    Console.WriteLine("Jugador X gana!");
+                    MessageBox.Show("Jugador X gana!");
+                    Application.Exit();
+                }
+                if (contadorO == 3)
+                {
+                    jugador1.Ganador = true;
+                    Console.WriteLine("Jugador O gana!");
+                    MessageBox.Show("Jugador O gana!");
+                    Application.Exit();
+                }
 
                 j++;
 
@@ -294,7 +295,7 @@ namespace TresEnRaya
         }
 
         public void CheckPartida()
-        { 
+        {
             CheckFilas();
             CheckColumnas();
             CheckDiagonalDesc();
@@ -312,30 +313,39 @@ namespace TresEnRaya
             }
             else
             {
-                if (jugadores[jugadorActivo].Fichas <= 0 && botonActual.Image != null)
+                if (jugadores[jugadorActivo].Fichas > 0 && !(botonActual.Tag.Equals(jugadores[jugadorActivo].Tipo)))
                 {
-                    if (botonActual.Tag.Equals(jugadores[jugadorActivo].Tipo))
-                    {
-                        botonActual.Image = null;
-                        botonActual.Tag = "-";
-                        jugadores[jugadorActivo].Fichas++;
-                        UpdatePerfil();
-                    }
-                    else
-                    {
-                        MessageBox.Show("No puedes quitar fichas de otros jugadores");
-                    }
-
+                    MessageBox.Show("No puedes suplantar fichas de otros jugadores");
                 }
                 else
                 {
-
-                    if (!botonActual.Tag.Equals(jugadores[jugadorActivo].Tipo))
+                    //Quita las fichas
+                    if (jugadores[jugadorActivo].Fichas <= 0 && botonActual.Image != null)
                     {
-                        MessageBox.Show("No puedes poner tu ficha en un boton ocupado");
+                        if (botonActual.Tag.Equals(jugadores[jugadorActivo].Tipo))
+                        {
+                            botonActual.Image = null;
+                            botonActual.Tag = "-";
+                            jugadores[jugadorActivo].Fichas++;
+                            UpdatePerfil();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No puedes quitar fichas de otros jugadores");
+                        }
                     }
                     else
-                        MessageBox.Show("Aun tienes fichas, no puedes quitar aún");
+                    {
+                        if (jugadores[jugadorActivo].Fichas > 0)
+                        {
+                            MessageBox.Show("Aun tienes fichas, no puedes quitar aún");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No te quedan fichas, quita una de tus fichas para cambiarla de lugar");
+                        }
+
+                    }
                 }
 
             }
