@@ -37,7 +37,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 333);
+            this.label1.Location = new System.Drawing.Point(11, 22);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(337, 28);
@@ -46,7 +46,7 @@
             // 
             // pbJugador
             // 
-            this.pbJugador.Location = new System.Drawing.Point(325, 277);
+            this.pbJugador.Location = new System.Drawing.Point(327, 8);
             this.pbJugador.Margin = new System.Windows.Forms.Padding(2);
             this.pbJugador.Name = "pbJugador";
             this.pbJugador.Size = new System.Drawing.Size(108, 115);
@@ -58,7 +58,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 401);
+            this.ClientSize = new System.Drawing.Size(463, 425);
             this.Controls.Add(this.pbJugador);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
