@@ -12,12 +12,6 @@ namespace TresEnRaya
 {
     public partial class Form1 : Form
     {
-        //public Form1()
-        //{
-        //    InitializeComponent();
-        //}
-
-
         //Global
         private Button[,] boton = new Button[3, 3];
 
@@ -36,7 +30,8 @@ namespace TresEnRaya
             InitializeComponent();
 
 
-            //Generar botones
+            //Generar botones y aplicar propiedades
+            //genera una matriz de 3x3 botones empezando por abajo
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -62,7 +57,7 @@ namespace TresEnRaya
             UpdatePerfil();
         }
 
-        //Selecciona uno de los dos jugadores al azar para empezar la partida.
+        //Devuelve un numero random entre 0 y 1 para seleccionar un jugador inicial
         public int InicioRandom()
         {
             Random r = new Random();
@@ -71,6 +66,7 @@ namespace TresEnRaya
         }
 
         //Actualiza los datos de los jugadores al hacer la tirada
+        //Le resta fichas al objeto jugador y le suma turnos. Los turnos nunca se muestran son mas para hacer debbug o analisis de datos
         public void UpdateJugador()
         {
             switch (jugadorActivo)
@@ -91,6 +87,7 @@ namespace TresEnRaya
             }
         }
 
+        //Esta funcion actualiza la imagen que muestra el jugador activo
         public void UpdatePerfil()
         {
             switch (jugadorActivo)
@@ -101,6 +98,9 @@ namespace TresEnRaya
                     break;
             }
         }
+
+        //Funcion que se ejecuta para actualizar las imagenes de los botones, el tag, comprobar si el 
+        //jugador activo a ganado y el cambio de jugador cuando este le hace click.
 
         public void PonerFicha(Button botonActual)
         {
@@ -127,6 +127,8 @@ namespace TresEnRaya
             }
         }
 
+        //Funciones de comprobacion de ganador
+        //Funcion que comprueba la diagonal Descendente si el jugador a ganado
         public void CheckDiagonalDesc()
         {
             int contadorX = 0, contadorO = 0;
@@ -166,6 +168,7 @@ namespace TresEnRaya
             }
         }
 
+        //Funcion que comprueba la diagonal Ascendente si el jugador a ganado
         public void CheckDiagonalAsc()
         {
             int contadorX = 0, contadorO = 0;
@@ -209,6 +212,7 @@ namespace TresEnRaya
             }
         }
 
+        //Funcion que comprueba las filas si el jugador a ganado
         public void CheckFilas()
         {
 
@@ -251,6 +255,7 @@ namespace TresEnRaya
             }
         }
 
+        //Funcion que comprueba las columnas si el jugador a ganado
         public void CheckColumnas()
         {
 
@@ -294,6 +299,7 @@ namespace TresEnRaya
 
         }
 
+        //Funcion que llamará a otras funciones para comprobar quien ha ganado
         public void CheckPartida()
         {
             CheckFilas();
@@ -307,19 +313,22 @@ namespace TresEnRaya
         {
             Button botonActual = (Button)sender;
 
+            //Control de usuario, comprueban si el jugador puede poner una ficha en el boton que ha seleccionado
             if (jugadores[jugadorActivo].Fichas > 0 && botonActual.Image == null)
             {
+                //Si el jugador tiene fichas y el boton no esta ocupado, ejecuta la funcion de poner boton.
                 PonerFicha(botonActual);
             }
             else
             {
                 if (jugadores[jugadorActivo].Fichas > 0 && !(botonActual.Tag.Equals(jugadores[jugadorActivo].Tipo)))
                 {
+                    //Comprueba si estas intentando poner una ficha en el boton ocupado por otro jugador
                     MessageBox.Show("No puedes suplantar fichas de otros jugadores");
                 }
                 else
                 {
-                    //Quita las fichas
+                    //Comprueba si el jugador activo tiene fichas, si no tiene le permitira quitar fichas que sean suyas
                     if (jugadores[jugadorActivo].Fichas <= 0 && botonActual.Image != null)
                     {
                         if (botonActual.Tag.Equals(jugadores[jugadorActivo].Tipo))
@@ -338,10 +347,12 @@ namespace TresEnRaya
                     {
                         if (jugadores[jugadorActivo].Fichas > 0)
                         {
+                            //Si el jugador tiene fichas no le permitira quitar
                             MessageBox.Show("Aun tienes fichas, no puedes quitar aún");
                         }
                         else
                         {
+                            //Si no tienen fichas, se le indicara al usuario que debe quitar una ficha para cambiarla de sitio.
                             MessageBox.Show("No te quedan fichas, quita una de tus fichas para cambiarla de lugar");
                         }
 

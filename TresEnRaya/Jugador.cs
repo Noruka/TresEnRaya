@@ -8,6 +8,7 @@ namespace TresEnRaya
 {
     class Jugador
     {
+        //Crear atributos privados
         private int fichas;
         private int turnos;
         private Boolean ganador = false;
